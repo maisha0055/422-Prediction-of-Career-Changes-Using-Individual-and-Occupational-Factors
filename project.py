@@ -29,17 +29,13 @@ print("Binary classification problem. Beacuse we are predicting two labels from 
 
 print(f"There are {df.size} data points")
 
-print(set(df.dtypes))                                                         #catagorical = object
+print(set(df.dtypes))                                                        
 
 len(df)
 
-"""For the output feature, do all unique classes have an equal number of instances or not?
-
-"""
 
 df['will_change_career'].value_counts()
 
-"""-Represent using a bar chart of N classes (N=number of classes you have in your dataset)."""
 
 labels = ['will not chnage' ,'will change ']
 values = [3738, 1262]
@@ -129,10 +125,10 @@ null_cols = df.columns[df.isna().any()].tolist()
 print(null_cols)
 
 for col in null_cols:
-    if df[col].dtype == df['gender'].dtype: # datatype == categorical= mode
+    if df[col].dtype == df['gender'].dtype: 
         mode = df[col].mode()[0]
         df[col] = df[col].fillna(mode)
-    else :             # datatype == numeric = median
+    else :             
         df[col] = df[col].fillna(df[col].median())
 
 df.isna().sum()
@@ -155,11 +151,11 @@ df['will_change_career'] = df['will_change_career'].astype('int64')
 """# **Feature Scalling**"""
 
 for col in df.columns.to_list():
-  col_var = np.var(df[col])                      #calculated variance ---> varivale gulor variance e onek diffrence thakle thn feature scalling kori
+  col_var = np.var(df[col])                    
   print(f'{col}: {round(col_var,2)}')
 
 y = [0,1]
-std = np.std(y)         #standerd daviation
+std = np.std(y)         
 mean = np.mean(y)
 
 print((0-mean)/std)
@@ -186,7 +182,7 @@ df['will_change_career'].value_counts()
 df_with_1 = df[df['will_change_career']==1]
 df_with_0 = df[df['will_change_career']==0]
 
-##class imbalancement            SMOTE-ing
+##class imbalancement        
 
 reduce_samp_1 = df_with_1.sample(n=1262, replace=False)
 
@@ -294,18 +290,18 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder  # Import LabelEncoder
+from sklearn.preprocessing import LabelEncoder  
 
 
-knn = KNeighborsClassifier()  # Initialize the KNN classifier
-knn.fit(X_train, y_train)     # Train the KNN model on the training data
-knn_pred = knn.predict(X_test) # Make predictions on the test set
+knn = KNeighborsClassifier()  
+knn.fit(X_train, y_train)     
+knn_pred = knn.predict(X_test) 
 
 knn_cm = confusion_matrix(y_test, knn_pred)
 
-# Initialize LabelEncoder if it wasn't previously
+
 label_encoder = LabelEncoder()
-label_encoder.fit(y)  # Fit the encoder to your target variable (y)
+label_encoder.fit(y)  
 
 
 disp = ConfusionMatrixDisplay(confusion_matrix=knn_cm, display_labels=label_encoder.classes_)
@@ -318,9 +314,9 @@ plt.show()
 
 from sklearn.tree import DecisionTreeClassifier
 
-dt = DecisionTreeClassifier(random_state=7)  # Initialize the Decision Tree classifier
-dt.fit(X_train, y_train)     # Train the Decision Tree model on the training data
-dt_pred = dt.predict(X_test) # Make predictions on the test set
+dt = DecisionTreeClassifier(random_state=7)  
+dt.fit(X_train, y_train)     
+dt_pred = dt.predict(X_test) 
 
 dt_cm = confusion_matrix(y_test, dt_pred)
 
@@ -334,9 +330,9 @@ plt.show()
 
 from sklearn.linear_model import LogisticRegression
 
-lr = LogisticRegression(solver='lbfgs')  # Initialize the Logistic Regression classifier
-lr.fit(X_train, y_train)     # Train the Logistic Regression model on the training data
-lr_pred = lr.predict(X_test) # Make predictions on the test set
+lr = LogisticRegression(solver='lbfgs')  
+lr.fit(X_train, y_train)     
+lr_pred = lr.predict(X_test) 
 
 
 lr_cm = confusion_matrix(y_test, lr_pred)
@@ -364,7 +360,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.optimizers import Adam
 # Build the neural network
-input_dim = X_train.shape[1]  # Get the number of features from X_train
+input_dim = X_train.shape[1]  
 model = Sequential([
     Dense(64, activation='relu', input_shape=(input_dim,)),
     Dropout(0.2),
