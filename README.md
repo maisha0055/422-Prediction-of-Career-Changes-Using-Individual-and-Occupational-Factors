@@ -146,7 +146,6 @@ This project is available under the MIT License. See LICENSE file for details.
 
 For questions, suggestions, or collaboration opportunities:
 - **GitHub**: [@maisha0055](https://github.com/maisha0055)
-- **Email**: [Your contact information]
 
 ---
 
